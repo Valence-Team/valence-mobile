@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Valence",
+    "slug": "valence-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "valence",
+    "userInterfaceStyle": "light",
+    "platforms": ["android", "ios"],
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "br.com.valence.app"
+    },
+    "android": {
+      "package": "br.com.valence.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#0A1018",
+        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "monochromeImage": "./assets/images/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#0A1018",
+          "image": "./assets/images/splash-icon.png",
+          "imageWidth": 120
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "O Valence usa a câmera para fotografar a folha afetada na lavoura.",
+          "photosPermission": "O Valence usa suas fotos para anexar a imagem da folha afetada à ocorrência.",
+          "microphonePermission": false
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "O Valence usa a localização para marcar a propriedade e calcular a distância dos alertas."
+        }
+      ],
+      "expo-secure-store"
+    ]
+  }
+}

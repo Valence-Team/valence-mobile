@@ -1,0 +1,44 @@
+{
+  "name": "valence-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "lint": "expo lint",
+    "format": "prettier --write .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@expo/vector-icons": "^15.0.2",
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "axios": "^1.16.1",
+    "expo": "~58.0.0",
+    "expo-constants": "~58.0.0",
+    "expo-crypto": "~58.0.0",
+    "expo-font": "~58.0.0",
+    "expo-image-picker": "~58.0.0",
+    "expo-linking": "~58.0.0",
+    "expo-location": "~58.0.0",
+    "expo-router": "~58.0.0",
+    "expo-secure-store": "~58.0.0",
+    "expo-splash-screen": "~58.0.0",
+    "expo-status-bar": "~58.0.0",
+    "react": "19.3.0",
+    "react-native": "0.88.1",
+    "react-native-safe-area-context": "~5.11.0",
+    "react-native-screens": "~4.30.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "~19.3.0",
+    "eslint": "^9.39.1",
+    "eslint-config-expo": "~58.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2",
+    "typescript": "~6.0.3"
+  }
+}

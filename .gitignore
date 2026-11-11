@@ -1,0 +1,59 @@
+# Dependências
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Nativo
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.apk
+*.aab
+
+# Metro
+.metro-health-check*
+
+# Logs
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.pem
+
+# TypeScript
+*.tsbuildinfo
+
+# Pastas nativas geradas
+/ios
+/android
+
+# Referência visual exportada do Figma
+TELAS-MOBILE/
+
+# Ferramentas locais
+CLAUDE.md
+CLAUDE.local.md
+.claude/
+.mcp.json
+AGENTS.md
+contexto/
+
+# Material de aula
+material-aula/
+
+# Ambiente
+.env
+.env.local
+*.env
+!.env.example
