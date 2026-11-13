@@ -14,7 +14,7 @@ O produtor fotografa a folha atacada e registra a ocorrência. A API Java faz a 
 
 ## Vídeo de demonstração
 
-Vídeo de até 5 minutos no YouTube (público ou não listado): **inserir o link aqui antes da entrega**.
+Vídeo de até 5 minutos no YouTube: **https://youtu.be/5gfchfm-znk**.
 
 ## Benefício ao cidadão
 
