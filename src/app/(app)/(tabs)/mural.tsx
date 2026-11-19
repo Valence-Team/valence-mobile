@@ -1,14 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import {
-  Alert,
-  FlatList,
-  RefreshControl,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { Alert, FlatList, RefreshControl, StyleSheet, Text, TextInput, View } from 'react-native';
 
 import { CartaoPublicacao } from '@/components/mural/CartaoPublicacao';
 import {
@@ -50,7 +42,10 @@ export default function TelaMural() {
   async function publicar() {
     const conteudo = texto.trim();
     if (conteudo.length < 3) {
-      Alert.alert('Publicação vazia', 'Escreva o que você está vendo na lavoura antes de publicar.');
+      Alert.alert(
+        'Publicação vazia',
+        'Escreva o que você está vendo na lavoura antes de publicar.',
+      );
       return;
     }
     setPublicando(true);

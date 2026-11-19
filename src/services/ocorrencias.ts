@@ -1,4 +1,4 @@
-import { api, paraPagina, urlAbsoluta } from './api';
+import { ErroApi, api, obterToken, paraPagina, urlAbsoluta } from './api';
 import { ambiente } from '@/config/ambiente';
 import type {
   ArquivoFoto,
@@ -75,8 +75,98 @@ export async function reprocessarTriagem(id: number): Promise<Ocorrencia> {
   return data;
 }
 
-export function enderecoDaFoto(foto: FotoOcorrencia): string {
-  return urlAbsoluta(foto.url);
+interface FotoEmCache {
+  promessa: Promise<string>;
+  uri?: string;
+}
+
+const LIMITE_FOTOS_EM_CACHE = 12;
+const fotosEmCache = new Map<string, FotoEmCache>();
+let tokenDoCache: string | null = null;
+
+function cacheDaSessao(): Map<string, FotoEmCache> {
+  const token = obterToken();
+  if (token !== tokenDoCache) {
+    fotosEmCache.clear();
+    tokenDoCache = token;
+  }
+  return fotosEmCache;
+}
+
+function servidaPelaApi(endereco: string): boolean {
+  return endereco.startsWith(`${ambiente.apiUrl}/`);
+}
+
+function paraDataUri(conteudo: Blob, tipo: string): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const leitor = new FileReader();
+    leitor.onload = () => {
+      const resultado = typeof leitor.result === 'string' ? leitor.result : '';
+      const inicio = resultado.indexOf(',');
+      if (inicio < 0) {
+        reject(new ErroApi('Não foi possível ler a foto.'));
+        return;
+      }
+      resolve(`data:${tipo};base64,${resultado.slice(inicio + 1)}`);
+    };
+    leitor.onerror = () => reject(new ErroApi('Não foi possível ler a foto.'));
+    leitor.readAsDataURL(conteudo);
+  });
+}
+
+export function enderecoDaFoto(url: string): string {
+  return urlAbsoluta(url);
+}
+
+export function fotoJaCarregada(url: string): string | null {
+  const endereco = enderecoDaFoto(url);
+  if (!servidaPelaApi(endereco)) {
+    return endereco;
+  }
+  return cacheDaSessao().get(endereco)?.uri ?? null;
+}
+
+export function carregarFoto(url: string, contentType?: string): Promise<string> {
+  const endereco = enderecoDaFoto(url);
+  if (!servidaPelaApi(endereco)) {
+    return Promise.resolve(endereco);
+  }
+
+  const cache = cacheDaSessao();
+  const existente = cache.get(endereco);
+  if (existente) {
+    return existente.promessa;
+  }
+
+  const promessa = api
+    .get<Blob>(endereco, {
+      responseType: 'blob',
+      headers: { Accept: 'image/*' },
+      timeout: ambiente.tempoLimiteEnvioFotoMs,
+    })
+    .then(({ data }) => paraDataUri(data, contentType ?? 'image/jpeg'));
+  const item: FotoEmCache = { promessa };
+
+  promessa.then(
+    (uri) => {
+      item.uri = uri;
+    },
+    () => {
+      if (cache.get(endereco) === item) {
+        cache.delete(endereco);
+      }
+    },
+  );
+
+  cache.set(endereco, item);
+  while (cache.size > LIMITE_FOTOS_EM_CACHE) {
+    const maisAntiga = cache.keys().next().value;
+    if (maisAntiga === undefined) {
+      break;
+    }
+    cache.delete(maisAntiga);
+  }
+  return promessa;
 }
 
 export function tituloDaOcorrencia(ocorrencia: Ocorrencia): string {

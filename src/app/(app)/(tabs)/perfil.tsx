@@ -59,7 +59,15 @@ function ItemMenu({
   );
 }
 
-function Secao({ titulo, descricao, children }: { titulo: string; descricao?: string; children: ReactNode }) {
+function Secao({
+  titulo,
+  descricao,
+  children,
+}: {
+  titulo: string;
+  descricao?: string;
+  children: ReactNode;
+}) {
   return (
     <View style={styles.secao}>
       <View style={styles.cabecalhoSecao}>

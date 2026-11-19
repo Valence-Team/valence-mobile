@@ -29,13 +29,7 @@ export interface ValoresPropriedade {
 }
 
 export type CampoPropriedade =
-  | 'nome'
-  | 'municipio'
-  | 'uf'
-  | 'areaHectares'
-  | 'latitude'
-  | 'longitude'
-  | 'culturas';
+  'nome' | 'municipio' | 'uf' | 'areaHectares' | 'latitude' | 'longitude' | 'culturas';
 
 interface FormularioPropriedadeProps {
   valoresIniciais: ValoresPropriedade;
@@ -141,7 +135,13 @@ export function FormularioPropriedade({
     };
     setErros(novosErros);
 
-    if (temErros(novosErros) || !valores.uf || area === null || latitude === null || longitude === null) {
+    if (
+      temErros(novosErros) ||
+      !valores.uf ||
+      area === null ||
+      latitude === null ||
+      longitude === null
+    ) {
       return;
     }
 

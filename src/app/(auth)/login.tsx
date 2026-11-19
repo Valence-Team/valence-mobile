@@ -41,9 +41,7 @@ export default function TelaLogin() {
         email: convertido.erroDoCampo('email'),
         senha: convertido.erroDoCampo('senha'),
       });
-      setErroGeral(
-        convertido.status === 401 ? 'E-mail ou senha inválidos.' : convertido.message,
-      );
+      setErroGeral(convertido.status === 401 ? 'E-mail ou senha inválidos.' : convertido.message);
     } finally {
       setEnviando(false);
     }
@@ -113,7 +111,9 @@ export default function TelaLogin() {
           </Link>
         </View>
 
-        <Text style={styles.ajuda}>Agrônomos e gestores recebem o acesso pela equipe do Valence.</Text>
+        <Text style={styles.ajuda}>
+          Agrônomos e gestores recebem o acesso pela equipe do Valence.
+        </Text>
       </View>
     </Tela>
   );

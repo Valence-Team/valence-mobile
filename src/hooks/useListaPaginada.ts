@@ -64,7 +64,13 @@ export function useListaPaginada<T>(
       })
       .catch((erro: unknown) => {
         if (ativo) {
-          setEstado({ chave, itens: [], pagina: 0, ultima: true, erro: converterErro(erro).message });
+          setEstado({
+            chave,
+            itens: [],
+            pagina: 0,
+            ultima: true,
+            erro: converterErro(erro).message,
+          });
         }
       })
       .finally(() => {

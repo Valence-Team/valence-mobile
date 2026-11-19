@@ -1,12 +1,6 @@
 import { api, paraPagina } from './api';
 import { ambiente } from '@/config/ambiente';
-import type {
-  Comentario,
-  DadosPublicacao,
-  Pagina,
-  PaginaSpring,
-  Publicacao,
-} from '@/types/api';
+import type { Comentario, DadosPublicacao, Pagina, PaginaSpring, Publicacao } from '@/types/api';
 
 const publicacoesEmCache = new Map<number, Publicacao>();
 

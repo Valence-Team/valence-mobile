@@ -28,14 +28,14 @@ export const UFS = [
   { sigla: 'TO', nome: 'Tocantins' },
 ];
 
-export const opcoesUf = UFS.map((uf) => ({ valor: uf.sigla, rotulo: uf.sigla, descricao: uf.nome }));
+export const opcoesUf = UFS.map((uf) => ({
+  valor: uf.sigla,
+  rotulo: uf.sigla,
+  descricao: uf.nome,
+}));
 
 function normalizar(texto: string): string {
-  return texto
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .trim()
-    .toLowerCase();
+  return texto.normalize('NFD').replace(/[̀-ͯ]/g, '').trim().toLowerCase();
 }
 
 export function encontrarSiglaUf(regiao: string | null | undefined): string | null {

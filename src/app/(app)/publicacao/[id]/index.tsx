@@ -101,25 +101,21 @@ export default function TelaPublicacao() {
   }
 
   function confirmarExclusao() {
-    Alert.alert(
-      'Excluir publicação?',
-      'A publicação e os comentários saem do mural para todos.',
-      [
-        { text: 'Cancelar', style: 'cancel' },
-        {
-          text: 'Excluir',
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await excluirPublicacao(publicacaoId);
-              router.back();
-            } catch (erro) {
-              Alert.alert('Não foi possível excluir', converterErro(erro).message);
-            }
-          },
+    Alert.alert('Excluir publicação?', 'A publicação e os comentários saem do mural para todos.', [
+      { text: 'Cancelar', style: 'cancel' },
+      {
+        text: 'Excluir',
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await excluirPublicacao(publicacaoId);
+            router.back();
+          } catch (erro) {
+            Alert.alert('Não foi possível excluir', converterErro(erro).message);
+          }
         },
-      ],
-    );
+      },
+    ]);
   }
 
   const acoes: AcaoBarraTopo[] = [];
@@ -174,9 +170,7 @@ export default function TelaPublicacao() {
                   publicacao={publicacao}
                   usuarioId={usuario?.id ?? null}
                   aoDenunciar={
-                    ehAutor
-                      ? undefined
-                      : () => router.push(rotas.denunciarPublicacao(publicacaoId))
+                    ehAutor ? undefined : () => router.push(rotas.denunciarPublicacao(publicacaoId))
                   }
                 />
                 <Text style={styles.tituloSecao} accessibilityRole="header">
@@ -234,7 +228,10 @@ export default function TelaPublicacao() {
               disabled={enviando || texto.trim().length === 0}
               accessibilityRole="button"
               accessibilityLabel="Enviar comentário"
-              accessibilityState={{ disabled: enviando || texto.trim().length === 0, busy: enviando }}
+              accessibilityState={{
+                disabled: enviando || texto.trim().length === 0,
+                busy: enviando,
+              }}
               style={({ pressed }) => [
                 styles.botaoEnviar,
                 (pressed || texto.trim().length === 0) && styles.botaoEnviarInativo,

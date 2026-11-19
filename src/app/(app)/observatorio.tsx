@@ -22,6 +22,7 @@ import type { EstatisticasFocos, Pagina, Foco } from '@/types/api';
 import type { Cultura } from '@/types/dominio';
 
 type Filtro = 'TODAS' | Cultura;
+type Abrangencia = 'BRASIL' | 'UF';
 
 const filtros: OpcaoFiltro<Filtro>[] = [
   { valor: 'TODAS', rotulo: 'Todas' },
@@ -76,8 +77,14 @@ function Resumo({ estatisticas }: { estatisticas: EstatisticasFocos }) {
 
 export default function TelaObservatorio() {
   const { usuario } = useAutenticacao();
-  const uf = usuario?.uf ?? 'SP';
+  const ufUsuario = usuario?.uf ?? null;
+  const [abrangencia, setAbrangencia] = useState<Abrangencia>('BRASIL');
   const [filtro, setFiltro] = useState<Filtro>('TODAS');
+  const uf = abrangencia === 'UF' ? ufUsuario : null;
+  const opcoesAbrangencia: OpcaoFiltro<Abrangencia>[] = [
+    { valor: 'BRASIL', rotulo: 'Brasil' },
+    ...(ufUsuario ? [{ valor: 'UF' as const, rotulo: ufUsuario }] : []),
+  ];
 
   const buscarFocos = useCallback(
     async (pagina: number): Promise<Pagina<Foco>> => {
@@ -108,8 +115,8 @@ export default function TelaObservatorio() {
     [uf],
   );
 
-  const focos = useListaPaginada(`focos-${uf}-${filtro}`, buscarFocos);
-  const estatisticas = useCarregamento(`estatisticas-${uf}`, buscarEstatisticas, {
+  const focos = useListaPaginada(`focos-${uf ?? 'BR'}-${filtro}`, buscarFocos);
+  const estatisticas = useCarregamento(`estatisticas-${uf ?? 'BR'}`, buscarEstatisticas, {
     recarregarAoFocar: false,
   });
 
@@ -141,9 +148,14 @@ export default function TelaObservatorio() {
         ListHeaderComponent={
           <View style={styles.cabecalho}>
             <Text style={styles.introducao}>
-              Dados abertos de focos de pragas em {uf}, sem nome, contato ou localização exata dos
-              produtores.
+              Dados abertos de focos de pragas {uf ? `em ${uf}` : 'no Brasil'}, sem nome, contato ou
+              localização exata dos produtores.
             </Text>
+            <FiltroChips
+              opcoes={opcoesAbrangencia}
+              selecionado={abrangencia}
+              aoSelecionar={setAbrangencia}
+            />
             {estatisticas.dados ? <Resumo estatisticas={estatisticas.dados} /> : null}
             <FiltroChips
               opcoes={filtros}

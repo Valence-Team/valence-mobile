@@ -72,7 +72,10 @@ export default function TelaEditarOcorrencia() {
         <Aviso
           tom="aviso"
           texto="Esta ocorrência já está em análise e não pode mais ser editada."
-          acao={{ rotulo: 'Ver ocorrência', onPress: () => router.replace(rotas.ocorrencia(ocorrenciaId)) }}
+          acao={{
+            rotulo: 'Ver ocorrência',
+            onPress: () => router.replace(rotas.ocorrencia(ocorrenciaId)),
+          }}
         />
       ) : (
         <FormularioOcorrencia

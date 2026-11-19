@@ -38,7 +38,7 @@ export function Tela({
           refreshControl={controleAtualizacao}
           contentContainerStyle={[
             !semMargem && styles.conteudo,
-            { paddingBottom: (rodape ? espacos.md : insets.bottom + espacos.xxl) },
+            { paddingBottom: rodape ? espacos.md : insets.bottom + espacos.xxl },
             estiloConteudo,
           ]}
         >

@@ -45,6 +45,7 @@ export const cores = {
   severidadeInativa: '#D5DCE5',
 
   sobreposicao: 'rgba(10, 16, 24, 0.55)',
+  fundoFoto: '#000000',
 };
 
 export type NomeCor = keyof typeof cores;

@@ -6,22 +6,28 @@ import { cores, espacos, raios, textos } from '@/theme';
 
 type TomAviso = 'info' | 'aviso' | 'erro' | 'sucesso';
 
-const paletas: Record<TomAviso, { fundo: string; borda: string; texto: string; icone: NomeIcone }> = {
-  info: { fundo: cores.acaoSuave, borda: cores.acaoBorda, texto: cores.acao, icone: 'info' },
-  aviso: {
-    fundo: cores.avisoFundo,
-    borda: cores.avisoBorda,
-    texto: cores.avisoTexto,
-    icone: 'alert-triangle',
-  },
-  erro: { fundo: cores.erroFundo, borda: cores.erroBorda, texto: cores.erroTexto, icone: 'alert-circle' },
-  sucesso: {
-    fundo: cores.sucessoFundo,
-    borda: cores.sucessoBorda,
-    texto: cores.sucessoTexto,
-    icone: 'check-circle',
-  },
-};
+const paletas: Record<TomAviso, { fundo: string; borda: string; texto: string; icone: NomeIcone }> =
+  {
+    info: { fundo: cores.acaoSuave, borda: cores.acaoBorda, texto: cores.acao, icone: 'info' },
+    aviso: {
+      fundo: cores.avisoFundo,
+      borda: cores.avisoBorda,
+      texto: cores.avisoTexto,
+      icone: 'alert-triangle',
+    },
+    erro: {
+      fundo: cores.erroFundo,
+      borda: cores.erroBorda,
+      texto: cores.erroTexto,
+      icone: 'alert-circle',
+    },
+    sucesso: {
+      fundo: cores.sucessoFundo,
+      borda: cores.sucessoBorda,
+      texto: cores.sucessoTexto,
+      icone: 'check-circle',
+    },
+  };
 
 interface AvisoProps {
   texto: string;

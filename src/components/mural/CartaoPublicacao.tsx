@@ -61,7 +61,8 @@ export function CartaoPublicacao({
               ) : null}
             </View>
             <Text style={styles.subtitulo}>
-              {descricaoPapel[publicacao.autor.papel]} · {formatarTempoRelativo(publicacao.criadoEm)}
+              {descricaoPapel[publicacao.autor.papel]} ·{' '}
+              {formatarTempoRelativo(publicacao.criadoEm)}
             </Text>
           </View>
         </View>

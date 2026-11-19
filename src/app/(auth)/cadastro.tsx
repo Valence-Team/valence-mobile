@@ -2,15 +2,7 @@ import { Link } from 'expo-router';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import {
-  Aviso,
-  BarraTopo,
-  Botao,
-  CampoSelecao,
-  CampoTexto,
-  Logo,
-  Tela,
-} from '@/components/ui';
+import { Aviso, BarraTopo, Botao, CampoSelecao, CampoTexto, Logo, Tela } from '@/components/ui';
 import { useAutenticacao } from '@/contexts/AutenticacaoContext';
 import { rotas } from '@/navigation/rotas';
 import { converterErro } from '@/services/api';

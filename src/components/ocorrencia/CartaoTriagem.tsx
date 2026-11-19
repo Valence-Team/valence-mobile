@@ -22,7 +22,11 @@ export function CartaoTriagem({ triagem, status }: CartaoTriagemProps) {
           <Etiqueta texto={emAndamento ? 'Em andamento' : 'Sem triagem'} tom="neutro" />
         </View>
         {triagem?.motivoImagem ? (
-          <Aviso tom="aviso" icone="camera-off" texto={mensagemMotivoImagem[triagem.motivoImagem]} />
+          <Aviso
+            tom="aviso"
+            icone="camera-off"
+            texto={mensagemMotivoImagem[triagem.motivoImagem]}
+          />
         ) : null}
         <Text style={styles.texto}>
           {emAndamento
@@ -112,7 +116,9 @@ export function CartaoTriagem({ triagem, status }: CartaoTriagemProps) {
         </View>
       ) : null}
 
-      <Text style={styles.nota}>A triagem é uma suspeita. Só o agrônomo confirma o diagnóstico.</Text>
+      <Text style={styles.nota}>
+        A triagem é uma suspeita. Só o agrônomo confirma o diagnóstico.
+      </Text>
     </Cartao>
   );
 }

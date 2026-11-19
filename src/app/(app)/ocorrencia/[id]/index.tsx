@@ -4,7 +4,7 @@ import { Alert, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
 import { CartaoLaudo } from '@/components/ocorrencia/CartaoLaudo';
 import { CartaoTriagem } from '@/components/ocorrencia/CartaoTriagem';
-import { FotoDaOcorrencia } from '@/components/ocorrencia/FotoDaOcorrencia';
+import { GaleriaDaOcorrencia } from '@/components/ocorrencia/GaleriaDaOcorrencia';
 import { LinhaDoTempoStatus } from '@/components/ocorrencia/LinhaDoTempoStatus';
 import {
   BarraTopo,
@@ -132,7 +132,7 @@ export default function TelaDetalheOcorrencia() {
         />
       ) : (
         <>
-          <FotoDaOcorrencia foto={ocorrencia.fotos?.[0]} />
+          <GaleriaDaOcorrencia fotos={ocorrencia.fotos ?? []} altura={240} />
 
           <Cartao estilo={styles.cartaoStatus}>
             <View style={styles.linhaStatus}>
@@ -144,7 +144,10 @@ export default function TelaDetalheOcorrencia() {
                 Registrada em {formatarDataHora(ocorrencia.dataRegistro)}
               </Text>
             </View>
-            <LinhaDoTempoStatus status={ocorrencia.status} temTriagem={Boolean(ocorrencia.triagem)} />
+            <LinhaDoTempoStatus
+              status={ocorrencia.status}
+              temTriagem={Boolean(ocorrencia.triagem)}
+            />
           </Cartao>
 
           <CartaoTriagem triagem={ocorrencia.triagem} status={ocorrencia.status} />

@@ -18,33 +18,35 @@ interface BotaoProps {
   rotuloAcessivel?: string;
 }
 
-const paletas: Record<Variante, { fundo: string; pressionado: string; borda: string; texto: string }> =
-  {
-    primario: {
-      fundo: cores.acao,
-      pressionado: cores.acaoPressionada,
-      borda: cores.acao,
-      texto: cores.textoSobreAcao,
-    },
-    contorno: {
-      fundo: cores.superficie,
-      pressionado: cores.acaoSuave,
-      borda: cores.acao,
-      texto: cores.acao,
-    },
-    perigo: {
-      fundo: cores.superficie,
-      pressionado: cores.erroFundo,
-      borda: cores.erroBorda,
-      texto: cores.erro,
-    },
-    texto: {
-      fundo: 'transparent',
-      pressionado: cores.acaoSuave,
-      borda: 'transparent',
-      texto: cores.acao,
-    },
-  };
+const paletas: Record<
+  Variante,
+  { fundo: string; pressionado: string; borda: string; texto: string }
+> = {
+  primario: {
+    fundo: cores.acao,
+    pressionado: cores.acaoPressionada,
+    borda: cores.acao,
+    texto: cores.textoSobreAcao,
+  },
+  contorno: {
+    fundo: cores.superficie,
+    pressionado: cores.acaoSuave,
+    borda: cores.acao,
+    texto: cores.acao,
+  },
+  perigo: {
+    fundo: cores.superficie,
+    pressionado: cores.erroFundo,
+    borda: cores.erroBorda,
+    texto: cores.erro,
+  },
+  texto: {
+    fundo: 'transparent',
+    pressionado: cores.acaoSuave,
+    borda: 'transparent',
+    texto: cores.acao,
+  },
+};
 
 export function Botao({
   titulo,

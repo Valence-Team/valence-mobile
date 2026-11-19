@@ -119,7 +119,8 @@ export default function TelaNovaOcorrencia() {
       ) : (
         <FormularioOcorrencia
           valoresIniciais={{
-            cultura: lista.length === 1 && lista[0].culturas.length === 1 ? lista[0].culturas[0] : null,
+            cultura:
+              lista.length === 1 && lista[0].culturas.length === 1 ? lista[0].culturas[0] : null,
             propriedadeId: lista.length === 1 ? lista[0].id : null,
             descricao: '',
             foto: null,

@@ -18,7 +18,7 @@ observatorio.interceptors.response.use(
 
 interface FiltroFocos {
   cultura: Cultura | null;
-  uf: string;
+  uf: string | null;
   deslocamento: number;
   registroRetornado: number;
 }
@@ -26,7 +26,7 @@ interface FiltroFocos {
 export async function listarFocos(filtro: FiltroFocos): Promise<ListaFocos> {
   const resposta = await observatorio.get<ListaFocos | ''>('/api/publico/focos', {
     params: {
-      uf: filtro.uf,
+      ...(filtro.uf ? { uf: filtro.uf } : {}),
       deslocamento: filtro.deslocamento,
       registroRetornado: filtro.registroRetornado,
       ...(filtro.cultura ? { cultura: filtro.cultura } : {}),
@@ -44,9 +44,12 @@ export async function listarFocos(filtro: FiltroFocos): Promise<ListaFocos> {
   return resposta.data;
 }
 
-export async function obterEstatisticas(uf: string, periodoDias = 30): Promise<EstatisticasFocos> {
+export async function obterEstatisticas(
+  uf: string | null,
+  periodoDias = 30,
+): Promise<EstatisticasFocos> {
   const { data } = await observatorio.get<EstatisticasFocos>('/api/publico/estatisticas', {
-    params: { uf, periodo: periodoDias },
+    params: { ...(uf ? { uf } : {}), periodo: periodoDias },
   });
   return data;
 }

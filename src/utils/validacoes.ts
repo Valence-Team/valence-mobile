@@ -57,7 +57,11 @@ export function validarTelefone(telefone: string): string | undefined {
     : 'Informe o telefone com DDD, como (16) 90000-0000.';
 }
 
-export function validarTamanho(valor: string, maximo: number, nomeCampo: string): string | undefined {
+export function validarTamanho(
+  valor: string,
+  maximo: number,
+  nomeCampo: string,
+): string | undefined {
   return valor.trim().length > maximo
     ? `${nomeCampo} pode ter no máximo ${maximo} caracteres.`
     : undefined;

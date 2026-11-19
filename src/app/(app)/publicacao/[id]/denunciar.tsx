@@ -30,10 +30,7 @@ export default function TelaDenunciarPublicacao() {
     setEnviando(true);
     try {
       await denunciarPublicacao(Number(id), motivo);
-      Alert.alert(
-        'Denúncia enviada',
-        'Obrigado. A moderação vai revisar a publicação.',
-      );
+      Alert.alert('Denúncia enviada', 'Obrigado. A moderação vai revisar a publicação.');
       router.back();
     } catch (erro) {
       const convertido = converterErro(erro);
@@ -63,7 +60,9 @@ export default function TelaDenunciarPublicacao() {
             <Text style={styles.titulo} accessibilityRole="header">
               Denunciar publicação
             </Text>
-            <Text style={styles.subtitulo}>Por que esta publicação não deveria estar no mural?</Text>
+            <Text style={styles.subtitulo}>
+              Por que esta publicação não deveria estar no mural?
+            </Text>
           </View>
 
           <View style={styles.opcoes} accessibilityRole="radiogroup">

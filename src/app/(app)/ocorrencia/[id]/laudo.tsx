@@ -2,7 +2,7 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import { Alert, StyleSheet, Text, View } from 'react-native';
 
-import { FotoDaOcorrencia } from '@/components/ocorrencia/FotoDaOcorrencia';
+import { GaleriaDaOcorrencia } from '@/components/ocorrencia/GaleriaDaOcorrencia';
 import {
   Aviso,
   BarraTopo,
@@ -129,7 +129,11 @@ function FormularioLaudo({ ocorrencia }: { ocorrencia: Ocorrencia }) {
           {rotuloCultura[ocorrencia.cultura]} · {ocorrencia.propriedade.municipio}/
           {ocorrencia.propriedade.uf} · registrada em {formatarDataCurta(ocorrencia.dataRegistro)}
         </Text>
-        <FotoDaOcorrencia foto={ocorrencia.fotos?.[0]} altura={160} textoVazio="Foto da ocorrência" />
+        <GaleriaDaOcorrencia
+          fotos={ocorrencia.fotos ?? []}
+          altura={180}
+          textoVazio="Foto da ocorrência"
+        />
         {resumo ? <Text style={styles.triagem}>{resumo}</Text> : null}
         <Text style={styles.descricao}>“{ocorrencia.descricao}”</Text>
       </View>

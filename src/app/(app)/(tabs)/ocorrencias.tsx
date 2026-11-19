@@ -22,11 +22,7 @@ import type { OcorrenciaPendente } from '@/storage/filaOffline';
 import { cores, espacos, margemTela } from '@/theme';
 import type { StatusOcorrencia } from '@/types/dominio';
 import { formatarDataCurta } from '@/utils/formatadores';
-import {
-  rotuloCultura,
-  rotuloStatusOcorrencia,
-  tomStatusOcorrencia,
-} from '@/utils/rotulos';
+import { rotuloCultura, rotuloStatusOcorrencia, tomStatusOcorrencia } from '@/utils/rotulos';
 
 type Filtro = 'TODAS' | StatusOcorrencia;
 

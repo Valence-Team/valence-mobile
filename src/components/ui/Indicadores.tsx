@@ -12,12 +12,7 @@ export function BarraSeveridade({ valor, mostrarTexto = true }: BarraSeveridadeP
   const texto = nivel > 0 ? `Severidade ${nivel} de 5` : 'Sem severidade';
 
   return (
-    <View
-      style={styles.linha}
-      accessible
-      accessibilityRole="text"
-      accessibilityLabel={texto}
-    >
+    <View style={styles.linha} accessible accessibilityRole="text" accessibilityLabel={texto}>
       <View style={styles.segmentos}>
         {[1, 2, 3, 4, 5].map((posicao) => (
           <View
@@ -25,8 +20,7 @@ export function BarraSeveridade({ valor, mostrarTexto = true }: BarraSeveridadeP
             style={[
               styles.segmento,
               {
-                backgroundColor:
-                  posicao <= nivel ? cores.severidadeAtiva : cores.severidadeInativa,
+                backgroundColor: posicao <= nivel ? cores.severidadeAtiva : cores.severidadeInativa,
               },
             ]}
           />

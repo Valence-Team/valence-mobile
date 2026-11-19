@@ -11,12 +11,7 @@ export type NivelAlerta = 'SUSPEITA' | 'CONFIRMADO' | 'ENCERRADO';
 export type StatusPublicacao = 'ATIVO' | 'OCULTO' | 'REMOVIDO';
 
 export type CategoriaDenuncia =
-  | 'RECOMENDACAO_PERIGOSA'
-  | 'DESINFORMACAO'
-  | 'OFENSA'
-  | 'DADOS_PESSOAIS'
-  | 'SPAM'
-  | 'SEM_PROBLEMA';
+  'RECOMENDACAO_PERIGOSA' | 'DESINFORMACAO' | 'OFENSA' | 'DADOS_PESSOAIS' | 'SPAM' | 'SEM_PROBLEMA';
 
 export type GravidadeDenuncia = 'BAIXA' | 'MEDIA' | 'ALTA';
 

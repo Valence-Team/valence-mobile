@@ -6,11 +6,11 @@ O produtor fotografa a folha atacada e registra a ocorrência. A API Java faz a 
 
 ## Integrantes
 
-| Nome | RM |
-| --- | --- |
+| Nome             | RM        |
+| ---------------- | --------- |
 | Henrique Martins | RM 563620 |
 | Guilherme Macedo | RM 562396 |
-| Pedro Henrique | RM 563405 |
+| Pedro Henrique   | RM 563405 |
 
 ## Vídeo de demonstração
 
@@ -30,37 +30,37 @@ ODS relacionados: 2 (Fome zero e agricultura sustentável), 9 (Inovação e infr
 
 ## Funcionalidades por papel
 
-| Papel | O que faz no app |
-| --- | --- |
+| Papel    | O que faz no app                                                                                                                                                                                                  |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Produtor | Cadastra propriedades, registra ocorrências com foto (câmera ou galeria), acompanha triagem e laudo, edita ou exclui enquanto a ocorrência não foi analisada, recebe alertas de casos próximos e marca como lidos |
-| Agrônomo | Vê a fila de análise por severidade, abre a ocorrência com a triagem da IA, emite o laudo (confirmada, descartada ou mais informações) e modera o mural |
-| Gestor | Modera publicações denunciadas (manter ou remover) |
-| Todos | Mural da região com publicações, comentários e denúncia; perfil; Observatório público (opcional); Sobre o App |
+| Agrônomo | Vê a fila de análise por severidade, abre a ocorrência com a triagem da IA, emite o laudo (confirmada, descartada ou mais informações) e modera o mural                                                           |
+| Gestor   | Modera publicações denunciadas (manter ou remover)                                                                                                                                                                |
+| Todos    | Mural da região com publicações, comentários e denúncia; perfil; Observatório público (opcional); Sobre o App                                                                                                     |
 
 ## Telas
 
-| # | Tela | Rota | Papel | Requisito |
-| --- | --- | --- | --- | --- |
-| 1 | Login | `/login` | público | 03 |
-| 2 | Cadastro | `/cadastro` | público | 03 |
-| 3 | Início com alertas próximos | `/inicio` | Produtor | 01, 02 |
-| 4 | Minhas ocorrências (filtros, paginação, fila offline) | `/ocorrencias` | Produtor | 01, 02 |
-| 5 | Nova ocorrência (foto, cultura, propriedade, descrição) | `/ocorrencia/nova` | Produtor | 02 |
-| 6 | Detalhe da ocorrência (andamento, triagem, laudo) | `/ocorrencia/[id]` | Produtor, Agrônomo, Gestor | 02 |
-| 7 | Editar ocorrência | `/ocorrencia/[id]/editar` | Produtor | 02 |
-| 8 | Fila de análise | `/analises` | Agrônomo | 01, 02 |
-| 9 | Emitir laudo | `/ocorrencia/[id]/laudo` | Agrônomo | 02 |
-| 10 | Moderação | `/moderacao` | Agrônomo, Gestor | 01, 02 |
-| 11 | Mural da região | `/mural` | todos | 01, 02 |
-| 12 | Publicação e comentários | `/publicacao/[id]` | todos | 02 |
-| 13 | Editar publicação | `/publicacao/[id]/editar` | autor | 02 |
-| 14 | Denunciar publicação | `/publicacao/[id]/denunciar` | todos | 02 |
-| 15 | Perfil e propriedades | `/perfil` | todos | 02, 03 |
-| 16 | Editar perfil | `/editar-perfil` | todos | 02 |
-| 17 | Nova propriedade (com localização do aparelho) | `/propriedade/nova` | Produtor | 02 |
-| 18 | Editar e excluir propriedade | `/propriedade/[id]` | Produtor | 02 |
-| 19 | Observatório público (dados abertos do .NET) | `/observatorio` | todos | 01 |
-| - | Sobre o App (versão e hash do commit) | `/sobre` | todos | 07, não conta no mínimo de telas |
+| #   | Tela                                                    | Rota                         | Papel                      | Requisito                        |
+| --- | ------------------------------------------------------- | ---------------------------- | -------------------------- | -------------------------------- |
+| 1   | Login                                                   | `/login`                     | público                    | 03                               |
+| 2   | Cadastro                                                | `/cadastro`                  | público                    | 03                               |
+| 3   | Início com alertas próximos                             | `/inicio`                    | Produtor                   | 01, 02                           |
+| 4   | Minhas ocorrências (filtros, paginação, fila offline)   | `/ocorrencias`               | Produtor                   | 01, 02                           |
+| 5   | Nova ocorrência (foto, cultura, propriedade, descrição) | `/ocorrencia/nova`           | Produtor                   | 02                               |
+| 6   | Detalhe da ocorrência (andamento, triagem, laudo)       | `/ocorrencia/[id]`           | Produtor, Agrônomo, Gestor | 02                               |
+| 7   | Editar ocorrência                                       | `/ocorrencia/[id]/editar`    | Produtor                   | 02                               |
+| 8   | Fila de análise                                         | `/analises`                  | Agrônomo                   | 01, 02                           |
+| 9   | Emitir laudo                                            | `/ocorrencia/[id]/laudo`     | Agrônomo                   | 02                               |
+| 10  | Moderação                                               | `/moderacao`                 | Agrônomo, Gestor           | 01, 02                           |
+| 11  | Mural da região                                         | `/mural`                     | todos                      | 01, 02                           |
+| 12  | Publicação e comentários                                | `/publicacao/[id]`           | todos                      | 02                               |
+| 13  | Editar publicação                                       | `/publicacao/[id]/editar`    | autor                      | 02                               |
+| 14  | Denunciar publicação                                    | `/publicacao/[id]/denunciar` | todos                      | 02                               |
+| 15  | Perfil e propriedades                                   | `/perfil`                    | todos                      | 02, 03                           |
+| 16  | Editar perfil                                           | `/editar-perfil`             | todos                      | 02                               |
+| 17  | Nova propriedade (com localização do aparelho)          | `/propriedade/nova`          | Produtor                   | 02                               |
+| 18  | Editar e excluir propriedade                            | `/propriedade/[id]`          | Produtor                   | 02                               |
+| 19  | Observatório público (dados abertos do .NET)            | `/observatorio`              | todos                      | 01                               |
+| -   | Sobre o App (versão e hash do commit)                   | `/sobre`                     | todos                      | 07, não conta no mínimo de telas |
 
 ## Arquitetura
 
@@ -113,19 +113,19 @@ As telas não chamam o Axios diretamente: elas usam os serviços de `src/service
 
 ## CRUD com a API Java
 
-| Recurso | Create | Read | Update | Delete |
-| --- | --- | --- | --- | --- |
-| Ocorrência | `POST /api/ocorrencias` com `Idempotency-Key` e `POST /api/ocorrencias/{id}/fotos` | `GET /api/ocorrencias`, `GET /api/ocorrencias/{id}` | `PUT /api/ocorrencias/{id}` | `DELETE /api/ocorrencias/{id}` |
-| Propriedade | `POST /api/propriedades` | `GET /api/propriedades`, `GET /api/propriedades/{id}` | `PUT /api/propriedades/{id}` | `DELETE /api/propriedades/{id}` |
-| Publicação do mural | `POST /api/mural` | `GET /api/mural`, `GET /api/mural/{id}` | `PUT /api/mural/{id}` | `DELETE /api/mural/{id}` |
-| Comentário | `POST /api/mural/{id}/comentarios` | `GET /api/mural/{id}/comentarios` | | |
-| Denúncia | `POST /api/mural/{id}/denuncias` | | | |
-| Laudo | `POST /api/ocorrencias/{id}/laudo` | | | |
-| Alerta | | `GET /api/alertas` | `PATCH /api/alertas/{id}/lido` | |
-| Moderação | | `GET /api/moderacao` | `PATCH /api/moderacao/{postId}` | |
-| Perfil | | `GET /api/usuarios/me` | `PUT /api/usuarios/me` | |
-| Triagem | `POST /api/ocorrencias/{id}/triagem` (refazer) | | | |
-| Fila de análise | | `GET /api/analises` | | |
+| Recurso             | Create                                                                             | Read                                                  | Update                          | Delete                          |
+| ------------------- | ---------------------------------------------------------------------------------- | ----------------------------------------------------- | ------------------------------- | ------------------------------- |
+| Ocorrência          | `POST /api/ocorrencias` com `Idempotency-Key` e `POST /api/ocorrencias/{id}/fotos` | `GET /api/ocorrencias`, `GET /api/ocorrencias/{id}`   | `PUT /api/ocorrencias/{id}`     | `DELETE /api/ocorrencias/{id}`  |
+| Propriedade         | `POST /api/propriedades`                                                           | `GET /api/propriedades`, `GET /api/propriedades/{id}` | `PUT /api/propriedades/{id}`    | `DELETE /api/propriedades/{id}` |
+| Publicação do mural | `POST /api/mural`                                                                  | `GET /api/mural`, `GET /api/mural/{id}`               | `PUT /api/mural/{id}`           | `DELETE /api/mural/{id}`        |
+| Comentário          | `POST /api/mural/{id}/comentarios`                                                 | `GET /api/mural/{id}/comentarios`                     |                                 |                                 |
+| Denúncia            | `POST /api/mural/{id}/denuncias`                                                   |                                                       |                                 |                                 |
+| Laudo               | `POST /api/ocorrencias/{id}/laudo`                                                 |                                                       |                                 |                                 |
+| Alerta              |                                                                                    | `GET /api/alertas`                                    | `PATCH /api/alertas/{id}/lido`  |                                 |
+| Moderação           |                                                                                    | `GET /api/moderacao`                                  | `PATCH /api/moderacao/{postId}` |                                 |
+| Perfil              |                                                                                    | `GET /api/usuarios/me`                                | `PUT /api/usuarios/me`          |                                 |
+| Triagem             | `POST /api/ocorrencias/{id}/triagem` (refazer)                                     |                                                       |                                 |                                 |
+| Fila de análise     |                                                                                    | `GET /api/analises`                                   |                                 |                                 |
 
 Tratamento de erros e feedback visual:
 
@@ -180,11 +180,11 @@ Leia o QR Code com o Expo Go. Com a API rodando no computador, use o IP do compu
 
 ## Variáveis de ambiente
 
-| Variável | Uso |
-| --- | --- |
-| `EXPO_PUBLIC_API_URL` | URL da API Java, sem barra no final |
-| `EXPO_PUBLIC_OBSERVATORIO_URL` | URL do Observatório .NET. Vazio esconde os dados abertos no app |
-| `EXPO_PUBLIC_COMMIT_HASH` | Força o hash exibido em Sobre o App. Vazio usa o hash do EAS Build ou do Git local |
+| Variável                       | Uso                                                                                |
+| ------------------------------ | ---------------------------------------------------------------------------------- |
+| `EXPO_PUBLIC_API_URL`          | URL da API Java, sem barra no final                                                |
+| `EXPO_PUBLIC_OBSERVATORIO_URL` | URL do Observatório .NET. Vazio esconde os dados abertos no app                    |
+| `EXPO_PUBLIC_COMMIT_HASH`      | Força o hash exibido em Sobre o App. Vazio usa o hash do EAS Build ou do Git local |
 
 Nenhuma dessas variáveis é segredo: elas vão para dentro do app. Chaves e senhas ficam só nos backends.
 
@@ -205,21 +205,21 @@ Produtores são criados pela tela de cadastro. Os usuários de agrônomo e gesto
 
 ## Bibliotecas
 
-| Biblioteca | Por que está no projeto |
-| --- | --- |
-| `expo`, `react`, `react-native` | Base do app, SDK 58 |
-| `expo-router` | Navegação por arquivos, pilhas, abas e rotas protegidas |
+| Biblioteca                                                                                                    | Por que está no projeto                                                                           |
+| ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `expo`, `react`, `react-native`                                                                               | Base do app, SDK 58                                                                               |
+| `expo-router`                                                                                                 | Navegação por arquivos, pilhas, abas e rotas protegidas                                           |
 | `react-native-screens`, `react-native-safe-area-context`, `expo-linking`, `expo-constants`, `expo-status-bar` | Dependências exigidas pelo Expo Router; `expo-constants` também lê versão e hash para Sobre o App |
-| `axios` | Cliente HTTP com interceptores para o JWT e para o tratamento único de erros |
-| `expo-secure-store` | Guarda o token com criptografia do sistema |
-| `@react-native-async-storage/async-storage` | Guarda a sessão e a fila offline |
-| `expo-image-picker` | Foto da folha pela câmera ou pela galeria |
-| `expo-location` | Preenche latitude, longitude, município e UF da propriedade |
-| `expo-crypto` | Gera a `Idempotency-Key` (UUID) das ocorrências |
-| `expo-font`, `expo-splash-screen` | Fontes da identidade visual e splash enquanto a sessão é restaurada |
-| `@expo/vector-icons` | Ícones Feather e MaterialCommunityIcons |
-| `eslint`, `eslint-config-expo`, `prettier`, `eslint-plugin-prettier`, `eslint-config-prettier` | Padronização e análise estática |
-| `typescript`, `@types/react`, `@types/node` | Tipagem estrita; `@types/node` só para o `app.config.ts` |
+| `axios`                                                                                                       | Cliente HTTP com interceptores para o JWT e para o tratamento único de erros                      |
+| `expo-secure-store`                                                                                           | Guarda o token com criptografia do sistema                                                        |
+| `@react-native-async-storage/async-storage`                                                                   | Guarda a sessão e a fila offline                                                                  |
+| `expo-image-picker`                                                                                           | Foto da folha pela câmera ou pela galeria                                                         |
+| `expo-location`                                                                                               | Preenche latitude, longitude, município e UF da propriedade                                       |
+| `expo-crypto`                                                                                                 | Gera a `Idempotency-Key` (UUID) das ocorrências                                                   |
+| `expo-font`, `expo-splash-screen`                                                                             | Fontes da identidade visual e splash enquanto a sessão é restaurada                               |
+| `@expo/vector-icons`                                                                                          | Ícones Feather e MaterialCommunityIcons                                                           |
+| `eslint`, `eslint-config-expo`, `prettier`, `eslint-plugin-prettier`, `eslint-config-prettier`                | Padronização e análise estática                                                                   |
+| `typescript`, `@types/react`, `@types/node`                                                                   | Tipagem estrita; `@types/node` só para o `app.config.ts`                                          |
 
 Sem biblioteca de componentes visuais e sem gerenciador de estado externo: a Context API e os hooks próprios cobrem o que o app precisa.
 
@@ -235,10 +235,10 @@ Sem biblioteca de componentes visuais e sem gerenciador de estado externo: a Con
 
 ## Uso de IA generativa
 
-| Ferramenta | Para quê |
-| --- | --- |
+| Ferramenta                                                | Para quê                                                                                                                      |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
 | Claude Code (assistente de programação com IA generativa) | Estrutura de pastas, telas, componentes, serviços, hooks e este README, a partir dos contratos da API e do protótipo do grupo |
-| Claude (design) | Primeiras versões do logotipo, da paleta e do protótipo das telas no Figma, revisadas pela equipe |
+| Claude (design)                                           | Primeiras versões do logotipo, da paleta e do protótipo das telas no Figma, revisadas pela equipe                             |
 
 Revisão do código gerado:
 

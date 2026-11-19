@@ -14,15 +14,21 @@ interface CartaoModeracaoProps {
 }
 
 export function CartaoModeracao({ item, decidindo, aoDecidir }: CartaoModeracaoProps) {
-  const totalDenuncias = item.totalDenuncias === 1 ? '1 denúncia' : `${item.totalDenuncias} denúncias`;
+  const totalDenuncias =
+    item.totalDenuncias === 1 ? '1 denúncia' : `${item.totalDenuncias} denúncias`;
   const situacao = item.status === 'OCULTO' ? 'oculto até a decisão' : 'visível no mural';
-  const categoria = item.categoriaIa ? rotuloCategoriaDenuncia[item.categoriaIa] : 'Aguardando análise';
+  const categoria = item.categoriaIa
+    ? rotuloCategoriaDenuncia[item.categoriaIa]
+    : 'Aguardando análise';
 
   return (
     <Cartao estilo={styles.cartao}>
       <View style={styles.etiquetas}>
         {item.gravidadeIa ? (
-          <Etiqueta texto={rotuloGravidade[item.gravidadeIa]} tom={tomGravidade[item.gravidadeIa]} />
+          <Etiqueta
+            texto={rotuloGravidade[item.gravidadeIa]}
+            tom={tomGravidade[item.gravidadeIa]}
+          />
         ) : null}
         <Etiqueta texto={totalDenuncias} tom="neutro" />
       </View>
@@ -35,7 +41,9 @@ export function CartaoModeracao({ item, decidindo, aoDecidir }: CartaoModeracaoP
       </View>
 
       <Text style={styles.analise}>Análise da IA: {categoria}</Text>
-      {item.justificativaIa ? <Text style={styles.justificativa}>{item.justificativaIa}</Text> : null}
+      {item.justificativaIa ? (
+        <Text style={styles.justificativa}>{item.justificativaIa}</Text>
+      ) : null}
 
       <View style={styles.botoes}>
         <Botao

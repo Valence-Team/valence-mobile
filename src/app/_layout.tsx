@@ -27,9 +27,7 @@ function Navegacao({ fontesProntas }: { fontesProntas: boolean }) {
   return (
     <>
       <StatusBar style="dark" />
-      <Stack
-        screenOptions={{ headerShown: false, contentStyle: { backgroundColor: cores.fundo } }}
-      >
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: cores.fundo } }}>
         <Stack.Screen name="index" />
         <Stack.Protected guard={!autenticado}>
           <Stack.Screen name="(auth)" />

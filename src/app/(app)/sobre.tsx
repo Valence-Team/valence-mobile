@@ -16,7 +16,11 @@ function lerHashDoCommit(): string {
   return extra?.commitHash ?? 'indisponível';
 }
 
-function Linha({ rotulo, valor, monoespacado = false }: {
+function Linha({
+  rotulo,
+  valor,
+  monoespacado = false,
+}: {
   rotulo: string;
   valor: string;
   monoespacado?: boolean;

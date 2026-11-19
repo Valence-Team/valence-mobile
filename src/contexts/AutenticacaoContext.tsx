@@ -133,7 +133,16 @@ export function ProvedorAutenticacao({ children }: { children: ReactNode }) {
       atualizarUsuario,
       limparAvisoSessao,
     }),
-    [sessao, restaurando, avisoSessao, entrar, cadastrar, sair, atualizarUsuario, limparAvisoSessao],
+    [
+      sessao,
+      restaurando,
+      avisoSessao,
+      entrar,
+      cadastrar,
+      sair,
+      atualizarUsuario,
+      limparAvisoSessao,
+    ],
   );
 
   return <ContextoAutenticacao value={valor}>{children}</ContextoAutenticacao>;

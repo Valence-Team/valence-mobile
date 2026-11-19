@@ -13,7 +13,13 @@ interface ItemOcorrenciaProps {
   onPress?: () => void;
 }
 
-export function ItemOcorrencia({ titulo, subtitulo, etiqueta, data, onPress }: ItemOcorrenciaProps) {
+export function ItemOcorrencia({
+  titulo,
+  subtitulo,
+  etiqueta,
+  data,
+  onPress,
+}: ItemOcorrenciaProps) {
   return (
     <Pressable
       onPress={onPress}
