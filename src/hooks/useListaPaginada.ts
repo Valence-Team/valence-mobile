@@ -1,9 +1,9 @@
 import { useFocusEffect } from 'expo-router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { Alert } from 'react-native';
 
 import { converterErro } from '@/services/api';
 import type { Pagina } from '@/types/api';
+import { alertar } from '@/utils/alerta';
 
 interface EstadoLista<T> {
   chave: string | null;
@@ -117,7 +117,7 @@ export function useListaPaginada<T>(
         ultima: resultado.ultima,
       }));
     } catch (erro) {
-      Alert.alert('Não foi possível carregar mais', converterErro(erro).message);
+      alertar('Não foi possível carregar mais', converterErro(erro).message);
     } finally {
       setCarregandoMais(false);
     }

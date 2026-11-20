@@ -1,12 +1,13 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { BarraTopo, Botao, CampoSelecao, CampoTexto, Tela } from '@/components/ui';
 import { useAutenticacao } from '@/contexts/AutenticacaoContext';
 import { converterErro } from '@/services/api';
 import { atualizarPerfil } from '@/services/usuarios';
 import { cores, espacos } from '@/theme';
+import { alertar } from '@/utils/alerta';
 import { mascararTelefone, somenteDigitos } from '@/utils/mascaras';
 import { opcoesUf } from '@/utils/ufs';
 import {
@@ -56,7 +57,7 @@ export default function TelaEditarPerfil() {
         uf,
       });
       await atualizarUsuario(atualizado);
-      Alert.alert('Perfil atualizado', 'Seus dados foram salvos.');
+      alertar('Perfil atualizado', 'Seus dados foram salvos.');
       router.back();
     } catch (erro) {
       const convertido = converterErro(erro);
@@ -66,7 +67,7 @@ export default function TelaEditarPerfil() {
         municipio: convertido.erroDoCampo('municipio'),
         uf: convertido.erroDoCampo('uf'),
       });
-      Alert.alert('Não foi possível salvar', convertido.message);
+      alertar('Não foi possível salvar', convertido.message);
     } finally {
       setSalvando(false);
     }

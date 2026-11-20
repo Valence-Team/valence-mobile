@@ -1,12 +1,13 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Aviso, Botao, OpcaoRadio } from '@/components/ui';
 import { converterErro } from '@/services/api';
 import { denunciarPublicacao } from '@/services/mural';
 import { cores, espacos, margemTela, raios, textos } from '@/theme';
+import { alertar } from '@/utils/alerta';
 
 const motivos = [
   {
@@ -30,16 +31,16 @@ export default function TelaDenunciarPublicacao() {
     setEnviando(true);
     try {
       await denunciarPublicacao(Number(id), motivo);
-      Alert.alert('Denúncia enviada', 'Obrigado. A moderação vai revisar a publicação.');
+      alertar('Denúncia enviada', 'Obrigado. A moderação vai revisar a publicação.');
       router.back();
     } catch (erro) {
       const convertido = converterErro(erro);
       if (convertido.status === 409) {
-        Alert.alert('Denúncia já registrada', 'Você já denunciou esta publicação.');
+        alertar('Denúncia já registrada', 'Você já denunciou esta publicação.');
         router.back();
         return;
       }
-      Alert.alert('Não foi possível denunciar', convertido.message);
+      alertar('Não foi possível denunciar', convertido.message);
     } finally {
       setEnviando(false);
     }

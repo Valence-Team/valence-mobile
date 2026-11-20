@@ -1,6 +1,6 @@
 import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
-import { Alert, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
 import {
   Aviso,
@@ -14,6 +14,7 @@ import {
 import { cores, espacos, raios, textos } from '@/theme';
 import type { ArquivoFoto, Propriedade } from '@/types/api';
 import { CULTURAS, type Cultura } from '@/types/dominio';
+import { alertar } from '@/utils/alerta';
 import { rotuloCultura } from '@/utils/rotulos';
 import { limites, temErros, type Erros } from '@/utils/validacoes';
 
@@ -78,7 +79,7 @@ export function FormularioOcorrencia({
   async function tirarFoto() {
     const permissao = await ImagePicker.requestCameraPermissionsAsync();
     if (!permissao.granted) {
-      Alert.alert(
+      alertar(
         'Câmera sem permissão',
         'Libere o acesso à câmera nas configurações do aparelho ou escolha uma foto da galeria.',
       );

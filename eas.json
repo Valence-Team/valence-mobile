@@ -10,7 +10,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://URL-DA-API-JAVA.azurewebsites.net",
+        "EXPO_PUBLIC_API_URL": "https://valence-rm562396.azurewebsites.net",
         "EXPO_PUBLIC_OBSERVATORIO_URL": ""
       }
     },
@@ -19,7 +19,7 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://URL-DA-API-JAVA.azurewebsites.net",
+        "EXPO_PUBLIC_API_URL": "https://valence-rm562396.azurewebsites.net",
         "EXPO_PUBLIC_OBSERVATORIO_URL": ""
       }
     }

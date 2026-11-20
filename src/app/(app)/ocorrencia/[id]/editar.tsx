@@ -1,6 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Alert } from 'react-native';
 
 import {
   FormularioOcorrencia,
@@ -14,6 +13,7 @@ import { converterErro } from '@/services/api';
 import { atualizarOcorrencia, obterOcorrencia, podeEditarOcorrencia } from '@/services/ocorrencias';
 import { listarTodasPropriedades } from '@/services/propriedades';
 import { cores } from '@/theme';
+import { alertar } from '@/utils/alerta';
 import type { Erros } from '@/utils/validacoes';
 
 export default function TelaEditarOcorrencia() {
@@ -42,7 +42,7 @@ export default function TelaEditarOcorrencia() {
         cultura: valores.cultura,
         descricao: valores.descricao,
       });
-      Alert.alert('Ocorrência atualizada', 'As alterações foram salvas.');
+      alertar('Ocorrência atualizada', 'As alterações foram salvas.');
       router.back();
     } catch (erro) {
       const convertido = converterErro(erro);
@@ -51,7 +51,7 @@ export default function TelaEditarOcorrencia() {
         propriedadeId: convertido.erroDoCampo('propriedadeId'),
         descricao: convertido.erroDoCampo('descricao'),
       });
-      Alert.alert('Não foi possível salvar', convertido.message);
+      alertar('Não foi possível salvar', convertido.message);
     } finally {
       setSalvando(false);
     }

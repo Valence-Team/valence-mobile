@@ -1,6 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Alert } from 'react-native';
 
 import { Aviso, BarraTopo, Botao, CampoTexto, Carregando, EstadoErro, Tela } from '@/components/ui';
 import { useAutenticacao } from '@/contexts/AutenticacaoContext';
@@ -9,6 +8,7 @@ import { converterErro } from '@/services/api';
 import { atualizarPublicacao, obterPublicacao, publicacaoEmCache } from '@/services/mural';
 import { cores } from '@/theme';
 import type { Publicacao } from '@/types/api';
+import { alertar } from '@/utils/alerta';
 import { limites } from '@/utils/validacoes';
 
 function FormularioPublicacao({ publicacao }: { publicacao: Publicacao }) {
@@ -26,12 +26,12 @@ function FormularioPublicacao({ publicacao }: { publicacao: Publicacao }) {
     setSalvando(true);
     try {
       await atualizarPublicacao(publicacao.id, conteudo);
-      Alert.alert('Publicação atualizada', 'A nova versão já aparece no mural.');
+      alertar('Publicação atualizada', 'A nova versão já aparece no mural.');
       router.back();
     } catch (falha) {
       const convertido = converterErro(falha);
       setErro(convertido.erroDoCampo('texto'));
-      Alert.alert('Não foi possível salvar', convertido.message);
+      alertar('Não foi possível salvar', convertido.message);
     } finally {
       setSalvando(false);
     }

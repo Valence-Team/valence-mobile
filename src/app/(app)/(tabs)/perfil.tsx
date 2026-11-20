@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import type { ReactNode } from 'react';
-import { Alert, Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { Pressable, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
 import { CartaoPropriedade } from '@/components/propriedade/CartaoPropriedade';
 import {
@@ -22,6 +22,7 @@ import { useListaPaginada } from '@/hooks/useListaPaginada';
 import { rotas } from '@/navigation/rotas';
 import { listarPropriedades } from '@/services/propriedades';
 import { cores, espacos, margemTela, textos } from '@/theme';
+import { alertar } from '@/utils/alerta';
 import { mascararTelefone } from '@/utils/mascaras';
 import { rotuloPapel } from '@/utils/rotulos';
 
@@ -94,7 +95,7 @@ export default function TelaPerfil() {
   );
 
   function confirmarSaida() {
-    Alert.alert('Sair do Valence?', 'Você vai precisar entrar de novo com e-mail e senha.', [
+    alertar('Sair do Valence?', 'Você vai precisar entrar de novo com e-mail e senha.', [
       { text: 'Cancelar', style: 'cancel' },
       { text: 'Sair', style: 'destructive', onPress: () => void sair() },
     ]);

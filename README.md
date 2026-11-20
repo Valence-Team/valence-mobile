@@ -6,15 +6,19 @@ O produtor fotografa a folha atacada e registra a ocorrência. A API Java faz a 
 
 ## Integrantes
 
-| Nome             | RM        |
-| ---------------- | --------- |
-| Henrique Martins | RM 563620 |
-| Guilherme Macedo | RM 562396 |
-| Pedro Henrique   | RM 563405 |
+| Nome                             | RM        |
+| -------------------------------- | --------- |
+| Henrique Martins Oliveira        | RM 563620 |
+| Guilherme Macedo Martins         | RM 562396 |
+| Pedro Henrique Luiz Alves Duarte | RM 563405 |
+
+## Stack
+
+React Native com **Expo** (SDK 58), Expo Router, TypeScript, Axios e AsyncStorage. O app consome a API Java do Valence publicada no Azure: `https://valence-rm562396.azurewebsites.net` ([Swagger](https://valence-rm562396.azurewebsites.net/swagger-ui/index.html)).
 
 ## Vídeo de demonstração
 
-Vídeo de até 5 minutos no YouTube: **https://youtu.be/5gfchfm-znk**.
+Vídeo no YouTube: **https://youtu.be/5gfchfm-znk**.
 
 ## Benefício ao cidadão
 
@@ -147,14 +151,14 @@ Os dados sempre são gravados na API. O aparelho guarda só a sessão e as ocorr
 
 ## Como rodar
 
-Pré-requisitos: Node.js 22 LTS, npm, Git, o app **Expo Go** atualizado no celular (SDK 58) ou um emulador Android, e a API Java no ar.
+Pré-requisitos: Node.js 22 LTS, npm e Git. Para abrir no celular, o app **Expo Go** atualizado (SDK 58) ou um emulador Android.
 
 ```bash
 npm install
 npx expo install --check
 ```
 
-Crie o arquivo `.env` a partir do exemplo e ajuste a URL da API:
+Crie o arquivo `.env` a partir do exemplo. Ele já aponta para a API publicada no Azure:
 
 ```bash
 cp .env.example .env
@@ -176,7 +180,12 @@ Executar:
 npx expo start
 ```
 
-Leia o QR Code com o Expo Go. Com a API rodando no computador, use o IP do computador na rede (`http://192.168.x.x:8080`) no celular físico e `http://10.0.2.2:8080` no emulador Android. `localhost` não funciona no aparelho.
+- **No navegador:** com o Expo em execução, aperte **w** no terminal. O app abre em `http://localhost:8081`.
+- **No celular:** leia o QR Code com o Expo Go.
+
+Para usar uma API rodando no próprio computador, troque `EXPO_PUBLIC_API_URL` no `.env`: no celular físico use o IP do computador na rede (`http://192.168.x.x:8080`) e no emulador Android `http://10.0.2.2:8080`. `localhost` não funciona no aparelho.
+
+Persistência local: a sessão e as ocorrências que ainda não foram enviadas ficam no **AsyncStorage** e continuam no aparelho depois de fechar o app. No celular, o token vai para o SecureStore; no navegador, que não tem SecureStore, vai para o AsyncStorage.
 
 ## Variáveis de ambiente
 
@@ -190,12 +199,23 @@ Nenhuma dessas variáveis é segredo: elas vão para dentro do app. Chaves e sen
 
 ## Usuários de teste
 
-Produtores são criados pela tela de cadastro. Os usuários de agrônomo e gestor são criados pelo seed da API Java e as credenciais estão no README do repositório da API.
+Criados pela API Java na primeira inicialização. Novos produtores também podem ser criados pela tela de cadastro.
 
-## Publicação no Firebase App Distribution
+| Papel                      | E-mail                   | Senha           |
+| -------------------------- | ------------------------ | --------------- |
+| Produtor                   | `produtor@valence.local` | `Produtor@2026` |
+| Produtor vizinho (a ~6 km) | `vizinho@valence.local`  | `Vizinho@2026`  |
+| Agrônomo                   | `agronomo@valence.local` | `Agronomo@2026` |
+| Gestor                     | `gestor@valence.local`   | `Gestor@2026`   |
+
+O produtor e o vizinho já têm uma propriedade de milho cada, em Ribeirão Preto/SP, para mostrar o alerta entre vizinhos.
+
+## Publicação no Firebase App Distribution (opcional)
+
+O enunciado não exige APK. Este roteiro serve para distribuir o app em celulares de teste.
 
 1. Faça o commit final e confira que não há alterações pendentes (`git status`). O hash exibido em Sobre o App precisa ser o desse commit.
-2. Troque `https://URL-DA-API-JAVA.azurewebsites.net` pela URL real da API em `eas.json` (perfis `preview` e `production`). O APK precisa de HTTPS.
+2. Confira a URL da API em `eas.json` (perfis `preview` e `production`). O APK precisa de HTTPS.
 3. Instale e entre no EAS: `npm install -g eas-cli`, depois `eas login`.
 4. Vincule o projeto: `eas init`. Se o EAS pedir, copie o `projectId` para `app.json` em `expo.extra.eas.projectId`.
 5. Gere o APK: `eas build -p android --profile preview`. No EAS Build o hash vem de `EAS_BUILD_GIT_COMMIT_HASH`.
@@ -213,6 +233,7 @@ Produtores são criados pela tela de cadastro. Os usuários de agrônomo e gesto
 | `axios`                                                                                                       | Cliente HTTP com interceptores para o JWT e para o tratamento único de erros                      |
 | `expo-secure-store`                                                                                           | Guarda o token com criptografia do sistema                                                        |
 | `@react-native-async-storage/async-storage`                                                                   | Guarda a sessão e a fila offline                                                                  |
+| `react-dom`, `react-native-web`                                                                               | Execução no navegador com `npx expo start` e a tecla **w**                                        |
 | `expo-image-picker`                                                                                           | Foto da folha pela câmera ou pela galeria                                                         |
 | `expo-location`                                                                                               | Preenche latitude, longitude, município e UF da propriedade                                       |
 | `expo-crypto`                                                                                                 | Gera a `Idempotency-Key` (UUID) das ocorrências                                                   |
@@ -231,6 +252,7 @@ Sem biblioteca de componentes visuais e sem gerenciador de estado externo: a Con
 - **Hooks de carregamento com estado derivado**: `useCarregamento` e `useListaPaginada` controlam loader, erro, recarga e paginação de todas as listas, sem repetir código nas telas.
 - **Fila offline com `Idempotency-Key`**: a mesma chave é reenviada até a API responder, e a API não duplica a ocorrência.
 - **Hash do commit no `app.config.ts`**: prioridade para `EXPO_PUBLIC_COMMIT_HASH`, depois `EAS_BUILD_GIT_COMMIT_HASH` e por fim `git rev-parse --short HEAD`.
+- **Execução no navegador**: o `Alert.alert` do React Native não abre diálogo na web, então as telas usam `alertar` (`src/utils/alerta.ts`), que usa `window.alert` e `window.confirm` no navegador. O envio da foto também muda na web: a imagem vira `Blob` antes de ir no `FormData`.
 - **Observatório opcional**: o app consome só a API Java. Se o professor pedir o consumo do .NET, basta preencher `EXPO_PUBLIC_OBSERVATORIO_URL` para ativar a tela de dados abertos (somente leitura, sem login).
 
 ## Uso de IA generativa
@@ -253,6 +275,7 @@ Decisões que o integrante explica na apresentação:
 - por que o token fica no SecureStore e a fila no AsyncStorage;
 - como a fila offline evita ocorrências duplicadas com a `Idempotency-Key`;
 - como `useListaPaginada` calcula o estado de carregamento sem `setState` dentro de efeito;
+- por que o app precisou de `alertar` e de outro envio de foto para funcionar no navegador;
 - como o hash do commit chega à tela Sobre o App no build do EAS.
 
 ## Licenças de terceiros

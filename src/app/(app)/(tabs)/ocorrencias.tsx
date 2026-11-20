@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Alert, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 
 import { ItemOcorrencia } from '@/components/ocorrencia/ItemOcorrencia';
 import {
@@ -21,6 +21,7 @@ import { listarOcorrencias, tituloDaOcorrencia } from '@/services/ocorrencias';
 import type { OcorrenciaPendente } from '@/storage/filaOffline';
 import { cores, espacos, margemTela } from '@/theme';
 import type { StatusOcorrencia } from '@/types/dominio';
+import { alertar } from '@/utils/alerta';
 import { formatarDataCurta } from '@/utils/formatadores';
 import { rotuloCultura, rotuloStatusOcorrencia, tomStatusOcorrencia } from '@/utils/rotulos';
 
@@ -57,7 +58,7 @@ export default function TelaMinhasOcorrencias() {
   }
 
   function abrirPendente(pendente: OcorrenciaPendente) {
-    Alert.alert(
+    alertar(
       pendente.erro ? 'Falha no envio' : 'Aguardando conexão',
       pendente.erro ??
         'Esta ocorrência está guardada no aparelho e será enviada quando a internet voltar.',

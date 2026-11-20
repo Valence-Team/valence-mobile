@@ -1,6 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Alert, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { RefreshControl, StyleSheet, Text, View } from 'react-native';
 
 import { CartaoLaudo } from '@/components/ocorrencia/CartaoLaudo';
 import { CartaoTriagem } from '@/components/ocorrencia/CartaoTriagem';
@@ -28,6 +28,7 @@ import {
   reprocessarTriagem,
 } from '@/services/ocorrencias';
 import { cores, espacos, textos } from '@/theme';
+import { alertar } from '@/utils/alerta';
 import { formatarDataHora } from '@/utils/formatadores';
 import { rotuloCultura, rotuloStatusOcorrencia, tomStatusOcorrencia } from '@/utils/rotulos';
 
@@ -60,7 +61,7 @@ export default function TelaDetalheOcorrencia() {
     (ocorrencia?.status === 'TRIADA' || ocorrencia?.status === 'EM_ANALISE');
 
   function confirmarExclusao() {
-    Alert.alert(
+    alertar(
       'Excluir ocorrência?',
       'O registro, a foto e a triagem serão apagados. Esta ação não pode ser desfeita.',
       [
@@ -74,10 +75,10 @@ export default function TelaDetalheOcorrencia() {
     setExcluindo(true);
     try {
       await excluirOcorrencia(ocorrenciaId);
-      Alert.alert('Ocorrência excluída', 'O registro foi apagado.');
+      alertar('Ocorrência excluída', 'O registro foi apagado.');
       router.back();
     } catch (erro) {
-      Alert.alert('Não foi possível excluir', converterErro(erro).message);
+      alertar('Não foi possível excluir', converterErro(erro).message);
     } finally {
       setExcluindo(false);
     }
@@ -89,7 +90,7 @@ export default function TelaDetalheOcorrencia() {
       const atualizada = await reprocessarTriagem(ocorrenciaId);
       carregamento.substituir(atualizada);
     } catch (erro) {
-      Alert.alert('Não foi possível refazer a triagem', converterErro(erro).message);
+      alertar('Não foi possível refazer a triagem', converterErro(erro).message);
     } finally {
       setReprocessando(false);
     }

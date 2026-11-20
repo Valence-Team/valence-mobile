@@ -1,3 +1,5 @@
+import { Platform } from 'react-native';
+
 import { ErroApi, api, obterToken, paraPagina, urlAbsoluta } from './api';
 import { ambiente } from '@/config/ambiente';
 import type {
@@ -45,13 +47,23 @@ export async function enviarFotoDaOcorrencia(
   foto: ArquivoFoto,
 ): Promise<FotoOcorrencia | Ocorrencia> {
   const formulario = new FormData();
-  formulario.append('foto', { uri: foto.uri, name: foto.nome, type: foto.tipo } as unknown as Blob);
+  const naWeb = Platform.OS === 'web';
+  if (naWeb) {
+    const arquivo = await (await fetch(foto.uri)).blob();
+    formulario.append('foto', arquivo, foto.nome);
+  } else {
+    formulario.append('foto', {
+      uri: foto.uri,
+      name: foto.nome,
+      type: foto.tipo,
+    } as unknown as Blob);
+  }
 
   const { data } = await api.post<FotoOcorrencia | Ocorrencia>(
     `/api/ocorrencias/${ocorrenciaId}/fotos`,
     formulario,
     {
-      headers: { 'Content-Type': 'multipart/form-data' },
+      headers: naWeb ? undefined : { 'Content-Type': 'multipart/form-data' },
       transformRequest: (corpo) => corpo,
       timeout: ambiente.tempoLimiteEnvioFotoMs,
     },

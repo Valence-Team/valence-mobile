@@ -6,9 +6,9 @@ import { ambiente } from '@/config/ambiente';
 import { cores, espacos, fontes, textos } from '@/theme';
 
 const integrantes = [
-  { nome: 'Henrique Martins', rm: 'RM 563620' },
-  { nome: 'Guilherme Macedo', rm: 'RM 562396' },
-  { nome: 'Pedro Henrique', rm: 'RM 563405' },
+  { nome: 'Henrique Martins Oliveira', rm: 'RM 563620' },
+  { nome: 'Guilherme Macedo Martins', rm: 'RM 562396' },
+  { nome: 'Pedro Henrique Luiz Alves Duarte', rm: 'RM 563405' },
 ];
 
 function lerHashDoCommit(): string {

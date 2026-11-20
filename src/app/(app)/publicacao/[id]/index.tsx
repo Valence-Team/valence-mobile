@@ -2,7 +2,6 @@ import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   FlatList,
   KeyboardAvoidingView,
   Platform,
@@ -38,6 +37,7 @@ import {
 } from '@/services/mural';
 import { cores, espacos, fontes, margemTela, raios, textos } from '@/theme';
 import type { Publicacao } from '@/types/api';
+import { alertar } from '@/utils/alerta';
 import { limites } from '@/utils/validacoes';
 
 async function buscarPublicacao(id: number): Promise<Publicacao> {
@@ -91,17 +91,14 @@ export default function TelaPublicacao() {
       setTexto('');
     } catch (erro) {
       const convertido = converterErro(erro);
-      Alert.alert(
-        'Não foi possível comentar',
-        convertido.erroDoCampo('texto') ?? convertido.message,
-      );
+      alertar('Não foi possível comentar', convertido.erroDoCampo('texto') ?? convertido.message);
     } finally {
       setEnviando(false);
     }
   }
 
   function confirmarExclusao() {
-    Alert.alert('Excluir publicação?', 'A publicação e os comentários saem do mural para todos.', [
+    alertar('Excluir publicação?', 'A publicação e os comentários saem do mural para todos.', [
       { text: 'Cancelar', style: 'cancel' },
       {
         text: 'Excluir',
@@ -111,7 +108,7 @@ export default function TelaPublicacao() {
             await excluirPublicacao(publicacaoId);
             router.back();
           } catch (erro) {
-            Alert.alert('Não foi possível excluir', converterErro(erro).message);
+            alertar('Não foi possível excluir', converterErro(erro).message);
           }
         },
       },

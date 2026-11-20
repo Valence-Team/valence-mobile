@@ -1,7 +1,6 @@
 import * as Crypto from 'expo-crypto';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert } from 'react-native';
 
 import {
   FormularioOcorrencia,
@@ -17,6 +16,7 @@ import { criarOcorrencia, enviarFotoDaOcorrencia } from '@/services/ocorrencias'
 import { listarTodasPropriedades } from '@/services/propriedades';
 import { cores } from '@/theme';
 import type { ArquivoFoto, Propriedade } from '@/types/api';
+import { alertar } from '@/utils/alerta';
 import type { Erros } from '@/utils/validacoes';
 
 function errosDoServidor(erro: ErroApi): Erros<CampoOcorrencia> {
@@ -54,7 +54,7 @@ export default function TelaNovaOcorrencia() {
       propriedadeNome: propriedade?.nome ?? 'Propriedade',
       ocorrenciaId,
     });
-    Alert.alert(
+    alertar(
       'Sem conexão agora',
       'A ocorrência ficou guardada no aparelho e será enviada quando a internet voltar.',
     );
@@ -88,7 +88,7 @@ export default function TelaNovaOcorrencia() {
           await guardarParaDepois(valores, foto, chave, lista, criada.id);
           return;
         }
-        Alert.alert(
+        alertar(
           'Ocorrência registrada sem foto',
           `${convertido.message} Você pode acompanhar o caso, e um agrônomo vai analisar pela descrição.`,
         );
@@ -102,7 +102,7 @@ export default function TelaNovaOcorrencia() {
         return;
       }
       setErrosServidor(errosDoServidor(convertido));
-      Alert.alert('Não foi possível registrar', convertido.message);
+      alertar('Não foi possível registrar', convertido.message);
     } finally {
       setEnviando(false);
     }

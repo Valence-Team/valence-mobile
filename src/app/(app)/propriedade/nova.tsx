@@ -1,6 +1,5 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert } from 'react-native';
 
 import {
   FormularioPropriedade,
@@ -12,6 +11,7 @@ import { converterErro } from '@/services/api';
 import { criarPropriedade } from '@/services/propriedades';
 import { cores } from '@/theme';
 import type { DadosPropriedade } from '@/types/api';
+import { alertar } from '@/utils/alerta';
 import type { Erros } from '@/utils/validacoes';
 
 export default function TelaNovaPropriedade() {
@@ -25,7 +25,7 @@ export default function TelaNovaPropriedade() {
     setErrosServidor({});
     try {
       await criarPropriedade(dados);
-      Alert.alert('Propriedade cadastrada', 'Agora você recebe alertas de casos perto dela.');
+      alertar('Propriedade cadastrada', 'Agora você recebe alertas de casos perto dela.');
       router.back();
     } catch (erro) {
       const convertido = converterErro(erro);
@@ -38,7 +38,7 @@ export default function TelaNovaPropriedade() {
         longitude: convertido.erroDoCampo('longitude'),
         culturas: convertido.erroDoCampo('culturas'),
       });
-      Alert.alert('Não foi possível cadastrar', convertido.message);
+      alertar('Não foi possível cadastrar', convertido.message);
     } finally {
       setSalvando(false);
     }

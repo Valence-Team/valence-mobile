@@ -1,6 +1,6 @@
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
-import { Alert, FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, Text, View } from 'react-native';
 
 import { CartaoAlerta } from '@/components/alerta/CartaoAlerta';
 import {
@@ -22,6 +22,7 @@ import { listarAlertas, marcarAlertaComoLido } from '@/services/alertas';
 import { converterErro } from '@/services/api';
 import { cores, espacos, margemTela, textos } from '@/theme';
 import type { Alerta } from '@/types/api';
+import { alertar } from '@/utils/alerta';
 import { primeiroNome } from '@/utils/formatadores';
 
 function Separador() {
@@ -43,7 +44,7 @@ export default function TelaInicio() {
         itens.map((item) => (item.id === alerta.id ? { ...item, lido: true } : item)),
       );
     } catch (erro) {
-      Alert.alert('Não foi possível marcar como lido', converterErro(erro).message);
+      alertar('Não foi possível marcar como lido', converterErro(erro).message);
     } finally {
       setMarcandoId(null);
     }

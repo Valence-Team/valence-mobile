@@ -1,6 +1,6 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { GaleriaDaOcorrencia } from '@/components/ocorrencia/GaleriaDaOcorrencia';
 import {
@@ -21,6 +21,7 @@ import { obterOcorrencia, tituloDaOcorrencia } from '@/services/ocorrencias';
 import { cores, espacos, raios, textos } from '@/theme';
 import type { Ocorrencia } from '@/types/api';
 import type { DecisaoLaudo } from '@/types/dominio';
+import { alertar } from '@/utils/alerta';
 import { formatarDataCurta, formatarPercentual } from '@/utils/formatadores';
 import { rotuloCultura, rotuloStatusOcorrencia, tomStatusOcorrencia } from '@/utils/rotulos';
 import { limites, temErros, type Erros } from '@/utils/validacoes';
@@ -92,7 +93,7 @@ function FormularioLaudo({ ocorrencia }: { ocorrencia: Ocorrencia }) {
         pragaConfirmada: decisao === 'CONFIRMADA' ? praga.trim() : undefined,
         parecer: parecer.trim(),
       });
-      Alert.alert(
+      alertar(
         'Laudo emitido',
         decisao === 'CONFIRMADA'
           ? 'Os vizinhos recebem o alerta confirmado e o caso vai para o mural.'
@@ -106,7 +107,7 @@ function FormularioLaudo({ ocorrencia }: { ocorrencia: Ocorrencia }) {
         pragaConfirmada: convertido.erroDoCampo('pragaConfirmada'),
         parecer: convertido.erroDoCampo('parecer'),
       });
-      Alert.alert('Não foi possível emitir o laudo', convertido.message);
+      alertar('Não foi possível emitir o laudo', convertido.message);
     } finally {
       setEnviando(false);
     }

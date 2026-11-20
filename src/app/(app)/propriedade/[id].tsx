@@ -1,6 +1,5 @@
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Alert } from 'react-native';
 
 import {
   FormularioPropriedade,
@@ -16,6 +15,7 @@ import {
 } from '@/services/propriedades';
 import { cores } from '@/theme';
 import type { DadosPropriedade } from '@/types/api';
+import { alertar } from '@/utils/alerta';
 import type { Erros } from '@/utils/validacoes';
 
 function paraTexto(valor: number): string {
@@ -39,7 +39,7 @@ export default function TelaEditarPropriedade() {
     setErrosServidor({});
     try {
       await atualizarPropriedade(propriedadeId, dados);
-      Alert.alert('Propriedade atualizada', 'As alterações foram salvas.');
+      alertar('Propriedade atualizada', 'As alterações foram salvas.');
       router.back();
     } catch (erro) {
       const convertido = converterErro(erro);
@@ -52,7 +52,7 @@ export default function TelaEditarPropriedade() {
         longitude: convertido.erroDoCampo('longitude'),
         culturas: convertido.erroDoCampo('culturas'),
       });
-      Alert.alert('Não foi possível salvar', convertido.message);
+      alertar('Não foi possível salvar', convertido.message);
     } finally {
       setSalvando(false);
     }
@@ -62,17 +62,17 @@ export default function TelaEditarPropriedade() {
     setExcluindo(true);
     try {
       await excluirPropriedade(propriedadeId);
-      Alert.alert('Propriedade excluída', 'Ela não recebe mais alertas.');
+      alertar('Propriedade excluída', 'Ela não recebe mais alertas.');
       router.back();
     } catch (erro) {
-      Alert.alert('Não foi possível excluir', converterErro(erro).message);
+      alertar('Não foi possível excluir', converterErro(erro).message);
     } finally {
       setExcluindo(false);
     }
   }
 
   function confirmarExclusao() {
-    Alert.alert(
+    alertar(
       'Excluir propriedade?',
       'Ela deixa de receber alertas. Esta ação não pode ser desfeita.',
       [

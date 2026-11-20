@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, FlatList, RefreshControl, StyleSheet, View } from 'react-native';
+import { FlatList, RefreshControl, StyleSheet, View } from 'react-native';
 
 import { CartaoModeracao } from '@/components/moderacao/CartaoModeracao';
 import {
@@ -16,6 +16,7 @@ import { decidirModeracao, listarFilaDeModeracao } from '@/services/moderacao';
 import { cores, espacos, margemTela } from '@/theme';
 import type { ItemModeracao } from '@/types/api';
 import type { DecisaoModeracao } from '@/types/dominio';
+import { alertar } from '@/utils/alerta';
 
 function Separador() {
   return <View style={styles.separador} />;
@@ -35,14 +36,14 @@ export default function TelaModeracao() {
     try {
       await decidirModeracao(item.postId, decisao);
       lista.alterarItens((itens) => itens.filter((atual) => atual.postId !== item.postId));
-      Alert.alert(
+      alertar(
         decisao === 'MANTER' ? 'Publicação mantida' : 'Publicação removida',
         decisao === 'MANTER'
           ? 'A publicação voltou para o mural da região.'
           : 'A publicação saiu do mural para todos.',
       );
     } catch (erro) {
-      Alert.alert('Não foi possível registrar a decisão', converterErro(erro).message);
+      alertar('Não foi possível registrar a decisão', converterErro(erro).message);
     } finally {
       setEmAndamento(null);
     }
@@ -53,7 +54,7 @@ export default function TelaModeracao() {
       void executar(item, decisao);
       return;
     }
-    Alert.alert('Remover publicação?', 'Ela sai do mural da região para todos os usuários.', [
+    alertar('Remover publicação?', 'Ela sai do mural da região para todos os usuários.', [
       { text: 'Cancelar', style: 'cancel' },
       { text: 'Remover', style: 'destructive', onPress: () => void executar(item, decisao) },
     ]);

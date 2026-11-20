@@ -1,11 +1,12 @@
 import * as Location from 'expo-location';
 import { useState } from 'react';
-import { Alert, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 
 import { Aviso, Botao, CampoSelecao, CampoTexto, Chip } from '@/components/ui';
 import { cores, espacos, textos } from '@/theme';
 import type { DadosPropriedade } from '@/types/api';
 import { CULTURAS, type Cultura } from '@/types/dominio';
+import { alertar } from '@/utils/alerta';
 import { mascararDecimal } from '@/utils/mascaras';
 import { rotuloCultura } from '@/utils/rotulos';
 import { encontrarSiglaUf, opcoesUf } from '@/utils/ufs';
@@ -29,7 +30,13 @@ export interface ValoresPropriedade {
 }
 
 export type CampoPropriedade =
-  'nome' | 'municipio' | 'uf' | 'areaHectares' | 'latitude' | 'longitude' | 'culturas';
+  | 'nome'
+  | 'municipio'
+  | 'uf'
+  | 'areaHectares'
+  | 'latitude'
+  | 'longitude'
+  | 'culturas';
 
 interface FormularioPropriedadeProps {
   valoresIniciais: ValoresPropriedade;
@@ -71,7 +78,7 @@ export function FormularioPropriedade({
     try {
       const permissao = await Location.requestForegroundPermissionsAsync();
       if (!permissao.granted) {
-        Alert.alert(
+        alertar(
           'Localização sem permissão',
           'Libere a localização nas configurações do aparelho ou digite as coordenadas.',
         );
@@ -100,7 +107,7 @@ export function FormularioPropriedade({
         }));
       }
     } catch {
-      Alert.alert(
+      alertar(
         'Não foi possível obter a localização',
         'Verifique se o GPS está ligado e tente de novo, ou digite as coordenadas.',
       );
