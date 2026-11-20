@@ -18,7 +18,7 @@ React Native com **Expo** (SDK 58), Expo Router, TypeScript, Axios e AsyncStorag
 
 ## Vídeo de demonstração
 
-Vídeo no YouTube: **https://youtu.be/5gfchfm-znk**.
+Vídeo no YouTube: **https://www.youtube.com/shorts/yFheJwaQvz4**.
 
 ## Benefício ao cidadão
 
